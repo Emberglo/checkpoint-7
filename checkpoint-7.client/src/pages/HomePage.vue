@@ -3,7 +3,9 @@
     <h1 class="my-5 bg-dark p-3 rounded d-flex align-items-center">
       <span class="mx-2">Welcome to BugHunter</span>
     </h1>
-    <p>Please log in to submit a bug report.</p>
+    <p>
+      Please log in to submit a bug report.
+    </p>
   </div>
 </template>
 

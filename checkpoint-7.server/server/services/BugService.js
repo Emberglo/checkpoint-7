@@ -3,8 +3,24 @@ import { dbContext } from '../db/DbContext'
 // import { Logger } from '../utils/Logger'
 
 class BugService {
-  async getAllBugs(userId) {
-    return await dbContext.Bugs.find(userId)
+  async delete(bugId) {
+    return await dbContext.Bugs.findByIdAndDelete(bugId)
+  }
+
+  async edit(bugId, body) {
+    return await dbContext.Bugs.findByIdAndUpdate(bugId, body)
+  }
+
+  async create(body) {
+    return await dbContext.Bugs.create(body)
+  }
+
+  async getActiveBug(bugId) {
+    return await dbContext.Bugs.findById(bugId)
+  }
+
+  async getAllBugs() {
+    return await dbContext.Bugs.find({})
   }
 }
 
