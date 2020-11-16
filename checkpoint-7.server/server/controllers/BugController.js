@@ -26,7 +26,6 @@ export class BugController extends BaseController {
 
   async edit(req, res, next) {
     try {
-      // const currentUser = req.userInfo.id
       res.send(await bugService.edit(req.params.bugId, req.body))
     } catch (error) {
       next(error)

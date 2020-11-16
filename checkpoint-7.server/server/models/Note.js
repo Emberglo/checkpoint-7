@@ -6,6 +6,7 @@ const Note = new Schema(
   {
     body: { type: String, required: true },
     creatorId: { type: String, required: true },
+    creatorName: { type: String, required: true },
     bug: { type: String, required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
@@ -15,6 +16,13 @@ Note.virtual('creator', {
   localField: 'creatorId',
   ref: 'Profile',
   foreignField: '_id',
+  justOne: true
+})
+
+Note.virtual('poster', {
+  localField: 'creatorName',
+  ref: 'Profile',
+  foreignField: 'name',
   justOne: true
 })
 

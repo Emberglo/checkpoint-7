@@ -17,20 +17,23 @@
       </div>
     </div>
     <div class="row py-3 justify-content-between">
-      <div class="col-3 ml-3">
-        <p class="text-center">
+      <div class="col ml-4">
+        <p class="ml-5 pl-1">
           Status: {{ bug.status }}
         </p>
       </div>
-      <div class="col-3 mr-4">
-        <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#editBugModal">
+      <div class="col d-flex justify-content-end mr-5">
+        <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#addNoteModal">
+          Add Note
+        </button>
+        <button class="btn btn-sm btn-outline-secondary ml-2" data-toggle="modal" data-target="#editBugModal">
           Edit Bug
         </button>
-        <button class="btn btn-sm btn-outline-secondary ml-2" @click="deleteBug()">
+        <button class="btn btn-sm btn-outline-secondary ml-2 mr-4" @click="deleteBug()">
           Close Bug
         </button>
       </div>
-      <!-- Modal -->
+      <!-- Edit Modal -->
       <div class="modal fade" id="editBugModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -54,6 +57,29 @@
           </div>
         </div>
       </div>
+      <!-- Add Note Modal -->
+      <div class="modal fade" id="addNoteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Add Note
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="color">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form @submit.prevent="addNote(profile.name)">
+                <textarea v-model="state.newNote.body" cols="35" rows="10" placeholder="Note" class="my-2"></textarea>
+                <button type="submit" class="btn btn-outline-secondary my-2">
+                  Submit Note
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <NoteComponent v-for="note in notes" :note-prop="note" :bug-prop="bug" :key="note._id" />
   </div>
@@ -71,7 +97,8 @@ export default {
   setup() {
     const state = reactive({
       editedBug: {},
-      deletedBug: {}
+      deletedBug: {},
+      newNote: {}
     })
     const route = useRoute()
     onMounted(async() => {
@@ -90,6 +117,10 @@ export default {
       deleteBug() {
         state.deletedBug.status = true
         bugService.deleteBug(route.params.bugId, state.deletedBug)
+      },
+      addNote(profileName) {
+        state.newNote.creatorName = profileName
+        noteService.addNote(route.params.bugId, state.newNote)
       }
     }
   },

@@ -1,6 +1,10 @@
 import { dbContext } from '../db/DbContext'
 
 class NoteService {
+  async deleteNote(noteId) {
+    return await dbContext.Notes.findByIdAndDelete(noteId)
+  }
+
   async editNote(body) {
     return await dbContext.Notes.findOneAndUpdate(body.id, body, { new: true })
   }
@@ -10,7 +14,7 @@ class NoteService {
   }
 
   async getBugNotes(bugId) {
-    return await dbContext.Notes.find({ bugId: bugId })
+    return await dbContext.Notes.find({ bug: bugId })
   }
 }
 

@@ -14,10 +14,8 @@ class BugService {
 
   async editBug(bugId, body) {
     try {
-      if (body.status === false) {
-        await api.put('/api/bugs/' + bugId, body)
-        this.getActiveBug(bugId)
-      }
+      await api.put('/api/bugs/' + bugId, body)
+      this.getActiveBug(bugId)
     } catch (error) {
       logger.error(error)
     }

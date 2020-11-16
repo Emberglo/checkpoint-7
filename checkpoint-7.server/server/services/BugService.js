@@ -1,6 +1,6 @@
 import { dbContext } from '../db/DbContext'
 // import { BadRequest } from '../utils/Errors'
-// import { Logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 
 class BugService {
   async delete(bugId) {
@@ -8,7 +8,8 @@ class BugService {
   }
 
   async edit(bugId, body) {
-    return await dbContext.Bugs.findByIdAndUpdate(bugId, body)
+    const res = await dbContext.Bugs.findOneAndUpdate({ _id: bugId, status: false }, body)
+    return res
   }
 
   async create(body) {

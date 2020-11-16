@@ -10,7 +10,15 @@ export class NoteController extends BaseController {
       .get('/:bugId', this.getBugNotes)
       .post('/:bugId', this.createNote)
       .put('/:noteId', this.editNote)
-      // .delete('/:noteId', this.deleteNote)
+      .delete('/:noteId', this.deleteNote)
+  }
+
+  async deleteNote(req, res, next) {
+    try {
+      res.send(await noteService.deleteNote(req.params.noteId))
+    } catch (error) {
+      next(error)
+    }
   }
 
   async editNote(req, res, next) {
@@ -33,7 +41,7 @@ export class NoteController extends BaseController {
 
   async getBugNotes(req, res, next) {
     try {
-      res.send(await noteService.getBugNotes(req.body.bug))
+      res.send(await noteService.getBugNotes(req.params.bugId))
     } catch (error) {
       next(error)
     }
