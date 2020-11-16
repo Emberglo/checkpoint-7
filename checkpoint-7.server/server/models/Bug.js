@@ -5,8 +5,8 @@ const Bug = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
-    closed: { type: String, default: false },
-    reportedBy: { type: String },
+    status: { type: String, default: false },
+    reportedBy: { type: String, required: true },
     closedDate: { type: Date },
     creatorId: { type: String, required: true }
   },
@@ -17,6 +17,13 @@ Bug.virtual('creator', {
   localField: 'creatorId',
   ref: 'Profile',
   foreignField: '_id',
+  justOne: true
+})
+
+Bug.virtual('poster', {
+  localField: 'reportedBy',
+  ref: 'Profile',
+  foreignField: 'name',
   justOne: true
 })
 
