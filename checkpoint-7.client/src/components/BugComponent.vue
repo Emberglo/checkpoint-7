@@ -18,7 +18,7 @@
       </div>
       <div class="col-3 text-center p-2 d-flex align-items-center justify-content-center">
         <p class="mb-0">
-          // eslint-disable-next-line vue/no-deprecated-filter
+          <!-- eslint-disable-next-line vue/no-deprecated-filter -->
           {{ bug.updatedAt | moment('MMMM Do YYYY, h:mm:ss a') }}
         </p>
       </div>
