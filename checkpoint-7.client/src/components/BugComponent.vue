@@ -18,7 +18,7 @@
       </div>
       <div class="col-3 text-center p-2 d-flex align-items-center justify-content-center">
         <p class="mb-0">
-          {{ date }}
+          {{ bug.updatedAt }}
         </p>
       </div>
     </div>
@@ -29,7 +29,7 @@
 import { computed } from 'vue'
 import { AppState } from '../AppState'
 import { useRouter } from 'vue-router'
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
 
 export default {
   name: 'BugComponent',
@@ -38,10 +38,11 @@ export default {
   },
   setup(props) {
     const router = useRouter()
+    // const date = props.bugProp.updatedAt.getUTCDate()
     return {
       bug: computed(() => props.bugProp),
       profile: computed(() => AppState.profile),
-      date: computed(() => format(props.bugProp.updatedAt, 'MM/dd/yyyy')),
+      // formattedDate: computed(() => format(date, 'MM/dd/yyyy')),
       getActiveBug(bugId) {
         router.push({ name: 'ActiveBug', params: { bugId: bugId } })
       }
