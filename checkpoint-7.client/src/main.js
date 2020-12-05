@@ -6,6 +6,7 @@ import router from './router'
 
 const root = createApp(App)
 registerGlobalComponents(root)
+App.use(require('vue-moment'))
 
 root
   .use(router)
