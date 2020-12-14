@@ -19,7 +19,7 @@
     <div class="row py-3 justify-content-between">
       <div class="col ml-4">
         <p class="ml-5 pl-1">
-          Open: {{ bug.status }}
+          Open Issue: {{ bug.status }}
         </p>
       </div>
       <div class="col d-flex justify-content-end mr-5">
