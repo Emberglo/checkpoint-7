@@ -45,7 +45,7 @@
       </div>
       <div class="col-3 text-center p-2 d-flex align-items-center justify-content-center">
         <h5 class="mb-0">
-          Status
+          Open
         </h5>
       </div>
       <div class="col-3 text-center p-2 d-flex align-items-center justify-content-center">
